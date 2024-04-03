@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+<div class="d-flex justify-content-end gap-1 me-2">
+    <a href="{% url 'show_record' %}" type="button" class="btn btn-sm btn-success">
+        Show Record
+    </a>
+    <a href="{% url 'logout_user' %}" type="button" class="btn btn-sm btn-danger">
+        Logout
+    </a>
+</div>
+
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+    The predicted Stress Level is <strong>{{ message }}</strong>!
+
+    {% if recommendations %}
+    <h6 class="alert-heading mt-2">Recommendations:</h6>
+    <ul>
+        {% for recommendation in recommendations %}
+        <li>{{ recommendation }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if isSuicide %}
+    <hr>
+    <p class="mb-0"><span class="h5 text-warning"><i class="bi bi-exclamation-triangle-fill"></i></span> WARNING: This
+        patient is having thoughts concerning for suicidal ideation or self-harm, and should
+        be probed further, referred, or transferred for emergency psychiatric evaluation as clinically appropriate and
+        depending on clinician overall risk assessment.</p>
+
+    {% endif %}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="refreshPage()"></button>
+</div>
+{% endfor %}
+
+<table class="table table-bordered caption-top">
+    <caption class="fst-italic">***Please refer here for PHQ1-PHQ9</caption>
+    <thead>
+    <tr class="text-center">
+        <th scope="col">Not at all</th>
+        <th scope="col">Several days</th>
+        <th scope="col">More than half the days</th>
+        <th scope="col">Nearly every day</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center">
+        <td>0</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+    </tr>
+    </tbody>
+</table>
+
+<form method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <div class="d-grid mb-2">
+        <button type="submit" class="btn btn-success">Predict Stress Level</button>
+    </div>
+</form>
+{% endblock %}

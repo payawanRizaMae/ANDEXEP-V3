@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+{% if request.user.is_superuser %}
+<div class="d-flex justify-content-end me-2">
+    <a href="{% url 'logout_user' %}" type="button" class="btn btn-sm btn-dark">
+        Logout
+    </a>
+</div>
+{% endif %}
+
+<div class="table-responsive">
+    <table class="table table-sm table-hover caption-top">
+        <caption><span class="h5">History Records</span> {% if not request.user.is_superuser %}(for {{ request.user }}){% endif %}
+        </caption>
+        <thead class="table-success">
+        <tr class="text-center">
+            {% if request.user.is_superuser %}
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            {% endif %}
+            <th scope="col">Age</th>
+            <th scope="col">Gender</th>
+            <th scope="col">BMI Category</th>
+            <th scope="col">PHQ-1</th>
+            <th scope="col">PHQ-2</th>
+            <th scope="col">PHQ-3</th>
+            <th scope="col">PHQ-4</th>
+            <th scope="col">PHQ-5</th>
+            <th scope="col">PHQ-6</th>
+            <th scope="col">PHQ-7</th>
+            <th scope="col">PHQ-8</th>
+            <th scope="col">PHQ-9</th>
+            <th scope="col">PHQ Total Score</th>
+            <th scope="col">Suicide</th>
+            <th scope="col">Stress Level</th>
+            <!--            <th scope="col">Recommendations</th>-->
+            <th scope="col">Date</th>
+            {% if request.user.is_superuser %}
+            <th scope="col">Action</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for record in stress_level_record %}
+        <tr class="text-center">
+            {% if request.user == record.user or request.user.is_superuser %}
+            {% if request.user.is_superuser %}
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ record.user }}</td>
+            {% endif %}
+            <td>{{ record.age }}</td>
+            <td>{{ record.gender }}</td>
+            <td>{{ record.bmi_category }}</td>
+            <td>{{ record.phq1 }}</td>
+            <td>{{ record.phq2 }}</td>
+            <td>{{ record.phq3 }}</td>
+            <td>{{ record.phq4 }}</td>
+            <td>{{ record.phq5 }}</td>
+            <td>{{ record.phq6 }}</td>
+            <td>{{ record.phq7 }}</td>
+            <td>{{ record.phq8 }}</td>
+            <td>{{ record.phq9 }}</td>
+            <td>{{ record.phq_score_total }}</td>
+            <td>{{ record.is_suicide }}</td>
+            <td>{{ record.stress_level }}</td>
+            <!--            <td>{{ record.recommendations }}</td>-->
+            <td>{{ record.created }}</td>
+
+            {% if request.user.is_superuser %}
+            <td>
+                <a href="{% url 'delete_record' record.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+            {% endif %}
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

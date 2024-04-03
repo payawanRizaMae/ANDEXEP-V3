@@ -1,0 +1,1 @@
+web: gunicorn ANDEXEP.wsgi --log-file -
