@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-+4ub5*sk^4qt%s0_-zjw6w7=d*yb(#s9h)cs0vkm5-(ja67nzq
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://andexep.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://andexep.up.railway.app', 'https://stress-prediction.up.railway.app']
 
 # Application definition
 
