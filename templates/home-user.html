@@ -24,14 +24,9 @@
         {% endfor %}
     </ul>
     {% endif %}
-    {% if isSuicide %}
     <hr>
-    <p class="mb-0"><span class="h5 text-warning"><i class="bi bi-exclamation-triangle-fill"></i></span> WARNING: This
-        patient is having thoughts concerning for suicidal ideation or self-harm, and should
-        be probed further, referred, or transferred for emergency psychiatric evaluation as clinically appropriate and
-        depending on clinician overall risk assessment.</p>
+    <p class="mt-2 mb-0">{{ contact_details }}</p>
 
-    {% endif %}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="refreshPage()"></button>
 </div>
 {% endfor %}

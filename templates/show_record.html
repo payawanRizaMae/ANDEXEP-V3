@@ -34,7 +34,9 @@
             <th scope="col">PHQ-8</th>
             <th scope="col">PHQ-9</th>
             <th scope="col">PHQ Total Score</th>
+            {% if request.user.is_superuser %}
             <th scope="col">Suicide</th>
+            {% endif %}
             <th scope="col">Stress Level</th>
             <!--            <th scope="col">Recommendations</th>-->
             <th scope="col">Date</th>
@@ -64,7 +66,13 @@
             <td>{{ record.phq8 }}</td>
             <td>{{ record.phq9 }}</td>
             <td>{{ record.phq_score_total }}</td>
-            <td>{{ record.is_suicide }}</td>
+            {% if request.user.is_superuser %}
+            {% if record.is_suicide == 'Yes' %}
+            <td><span class="h5 text-warning"><i class="bi bi-exclamation-triangle-fill"></i></span> Patient has suicidal thoughts. Urgent attention needed.</td>
+            {% else %}
+            <td>No</td>
+            {% endif %}
+            {% endif %}
             <td>{{ record.stress_level }}</td>
             <!--            <td>{{ record.recommendations }}</td>-->
             <td>{{ record.created }}</td>

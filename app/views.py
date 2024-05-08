@@ -154,12 +154,9 @@ def home_user(request):
             # Instead of redirecting, render the same page with recommendations
             context = {
                 'form': form,
-                'recommendations': recommendations
+                'recommendations': recommendations,
+                'contact_details': 'If you find yourself in need of clarification or assistance, please feel free to reach out to Dr. Bahalia (0943 527 3218)'
             }
-
-            # Add isSuicide to context only if it's not 0
-            if int(input_data['phq9']) != 0:
-                context['isSuicide'] = int(input_data['phq9'])
 
             return render(request, 'home-user.html', context)
         else:
@@ -172,7 +169,7 @@ def home_user(request):
 
 @login_required(login_url='login_user')
 def show_record(request):
-    stress_level_record = StressLevelRecord.objects.all()
+    stress_level_record = StressLevelRecord.objects.order_by('-created')
 
     return render(request, 'show_record.html', {'stress_level_record': stress_level_record})
 
