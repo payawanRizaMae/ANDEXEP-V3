@@ -11,6 +11,11 @@
 </div>
 {% endif %}
 
+<!-- Back button -->
+<div class="mb-3">
+    <button onclick="history.back()" class="btn btn-primary btn-sm">Back</button>
+</div>
+
 <div class="table-responsive">
     <table class="table table-sm table-hover caption-top">
         <caption><span class="h5">History Records</span> {% if not request.user.is_superuser %}(for {{ request.user }}){% endif %}
