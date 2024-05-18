@@ -11,10 +11,12 @@
 </div>
 {% endif %}
 
-<!-- Back button -->
+<!-- Back button (only for non-admin users) -->
+{% if not request.user.is_superuser %}
 <div class="mb-3">
     <button onclick="history.back()" class="btn btn-danger btn-sm">Back</button>
 </div>
+{% endif %}
 
 <div class="table-responsive">
     <table class="table table-sm table-hover caption-top">
