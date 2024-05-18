@@ -124,7 +124,8 @@ def home_user(request):
 
             # Convert numerical values to text for gender and BMI Category
             gender_text = dict(StressLevelForm.GENDER_CHOICES).get(int(input_data['gender']), 'Unknown')
-            bmi_category_text = dict(StressLevelForm.BMI_CATEGORY_CHOICES).get(int(input_data['bmi_category']),'Unknown')
+            bmi_category_text = dict(StressLevelForm.BMI_CATEGORY_CHOICES).get(int(input_data['bmi_category']),
+                                                                               'Unknown')
 
             # Save to database
             stress_level_record = StressLevelRecord(

@@ -11,7 +11,6 @@ class AppUser(AbstractUser):
 
 
 class StressLevelRecord(models.Model):
-    objects = None
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     age = models.IntegerField()
     gender = models.CharField(max_length=10)
