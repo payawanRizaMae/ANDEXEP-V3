@@ -155,7 +155,7 @@ def home_user(request):
             context = {
                 'form': form,
                 'recommendations': recommendations,
-                'contact_details': 'If you find yourself in need of clarification or assistance, please feel free to reach out to APRILONE N. MOLINA(09811451093)'
+                'contact_details': 'If you find yourself in need of clarification or assistance, please feel free to reach out to Renz Wally Amualla, RPm(09483814197)'
             }
 
             return render(request, 'home-user.html', context)
